@@ -25,17 +25,17 @@ const initialUserData = [
 ];
 const App = () => {
 	const [usersData, setUserData] = useState(initialUserData);
-	const [isValid, setIsValid] = useState();
+	const [modalTypeToShow, setModalTypeToShow] = useState();
 
-	const takeValueFromChild = (user, isValid) => {
-		setUserData((prevValue) => [user, ...prevValue]);
-		setIsValid(isValid);
+	const takeValueFromChild = (user, errType) => {
+		console.log(errType);
+		if (!errType) setUserData((prevValue) => [user, ...prevValue]);
+		setModalTypeToShow(errType);
 		// console.log(isValidState);
 	};
 	const errHandler = () => {
-		setIsValid(null);
+		setModalTypeToShow(null);
 	};
-	console.log(isValid);
 
 	return (
 		<div className={Classes.page}>
@@ -44,8 +44,12 @@ const App = () => {
 				<Heading>Users</Heading>
 				<Users item={usersData} />
 			</Card>
-			{isValid && <EmptyValueModal onConfirm={errHandler} />}
-			{isValid && <NegValueModal onConfirm={errHandler} />}
+			{modalTypeToShow === "empty" && (
+				<EmptyValueModal onConfirm={errHandler} />
+			)}
+			{modalTypeToShow === "negative" && (
+				<NegValueModal onConfirm={errHandler} />
+			)}
 		</div>
 	);
 };

@@ -7,15 +7,18 @@ import Button from "../UI/Button.js";
 const Form = (props) => {
 	const [enteredName, setEnteredName] = useState("");
 	const [enteredAge, setEnteredAge] = useState("");
-	const [isValid, setIsValid] = useState();
+	// const [errType, setErrType] = useState();
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		let errType;
+
 		if (enteredAge.trim().length === 0 || enteredName.trim().length === 0) {
-			setIsValid("empty");
-		}
-		if (+enteredAge < 0) {
-			setIsValid("negative");
+			// setErrType("empty");
+			errType = "empty";
+		} else if (+enteredAge < 0) {
+			// setErrType("negative");
+			errType = "negative";
 		}
 
 		const usersData = {
@@ -23,7 +26,7 @@ const Form = (props) => {
 			name: enteredName,
 			age: enteredAge,
 		};
-		props.transferToParent(usersData, isValid);
+		props.transferToParent(usersData, errType);
 		setEnteredName("");
 		// setEnteredAge("");
 		// props.
