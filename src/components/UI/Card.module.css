@@ -1,0 +1,12 @@
+.card {
+	margin: 2rem;
+	padding: 0 0 1rem;
+
+	border-radius: 1rem;
+	/* box-shadow: 0 2px 8px rgba(255, 255, 255, 0.775); */
+	background-color: aliceblue;
+
+	overflow: hidden;
+
+	max-width: 800px;
+}
