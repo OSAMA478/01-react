@@ -65,7 +65,7 @@ const App = () => {
 					onConfirm={errHandler}
 				/>
 			) : (
-				-1
+				""
 			)}
 		</div>
 	);
