@@ -8,6 +8,7 @@ const Button = (props) => {
 			className={Classes.button}
 			type={`${props.type}`}
 		>
+			{props.innerText}
 			{props.children}
 		</button>
 	);

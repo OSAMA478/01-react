@@ -43,7 +43,7 @@ const Form = (props) => {
 
 	return (
 		<Card>
-			<Heading>Enter User Details</Heading>
+			<Heading innerText="Enter User Details" />
 			<form onSubmit={submitHandler} className={Classes.form}>
 				<div>
 					<label htmlFor="username">Name</label>
@@ -64,7 +64,7 @@ const Form = (props) => {
 						className={Classes.input}
 					/>
 				</div>
-				<Button type="submit">Add user</Button>
+				<Button innerText="Add user" type="submit" />
 			</form>
 		</Card>
 	);

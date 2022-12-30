@@ -3,8 +3,8 @@ import Classes from "./User.module.css";
 
 const User = (props) => {
 	return (
-		<p className={Classes.user}>
-			{props.name} ({props.age} years old)
+		<p id={props.id} onClick={props.onClick} className={Classes.user}>
+			{props.innerText}
 		</p>
 	);
 };
