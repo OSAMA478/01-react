@@ -1,8 +1,6 @@
 import React from "react";
 import User from "../Users/User";
 
-// import Classes from "./Users.module.css";
-
 const Users = (props) => {
 	return (
 		<div>

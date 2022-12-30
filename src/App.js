@@ -28,16 +28,15 @@ const App = () => {
 	const [modalTypeToShow, setModalTypeToShow] = useState();
 
 	const takeValueFromChild = (user, errType) => {
-		console.log(errType);
 		if (!errType) setUserData((prevValue) => [user, ...prevValue]);
 		setModalTypeToShow(errType);
-		console.log(user);
 	};
+
 	const errHandler = () => {
 		setModalTypeToShow(null);
 	};
+
 	const deleteHandler = (event) => {
-		console.log(event.target);
 		const id = event.target.id;
 		setUserData(
 			usersData.filter((user) => {

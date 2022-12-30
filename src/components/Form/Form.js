@@ -7,17 +7,14 @@ import Button from "../UI/Button.js";
 const Form = (props) => {
 	const [enteredName, setEnteredName] = useState("");
 	const [enteredAge, setEnteredAge] = useState("");
-	// const [errType, setErrType] = useState();
 
 	const submitHandler = (event) => {
 		event.preventDefault();
 		let errType;
 
 		if (enteredAge.trim().length === 0 || enteredName.trim().length === 0) {
-			// setErrType("empty");
 			errType = "empty";
 		} else if (+enteredAge < 0) {
-			// setErrType("negative");
 			errType = "negative";
 		}
 
@@ -28,17 +25,13 @@ const Form = (props) => {
 		};
 		props.transferToParent(usersData, errType);
 		setEnteredName("");
-		// setEnteredAge("");
-		// props.
 	};
 
 	const nameChangeHandler = (event) => {
 		setEnteredName(event.target.value);
-		console.log(event.target.value);
 	};
 	const ageChangeHandler = (event) => {
 		setEnteredAge(event.target.value);
-		console.log(event.target.value);
 	};
 
 	return (
