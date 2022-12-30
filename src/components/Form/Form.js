@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import Classes from "./Form.module.css";
 import Card from "../UI/Card.js";
 import Heading from "../UI/Heading.js";
 import Button from "../UI/Button.js";
 
 const Form = (props) => {
-	const [enteredName, setEnteredName] = useState("");
-	const [enteredAge, setEnteredAge] = useState("");
+	const nameInputRef = useRef();
+	const ageInputRef = useRef();
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		const enteredName = nameInputRef.current.value;
+		const enteredAge = ageInputRef.current.value;
+
+		console.log();
 		let errType;
 
 		if (enteredAge.trim().length === 0 || enteredName.trim().length === 0) {
@@ -24,14 +28,8 @@ const Form = (props) => {
 			age: enteredAge,
 		};
 		props.transferToParent(usersData, errType);
-		setEnteredName("");
-	};
-
-	const nameChangeHandler = (event) => {
-		setEnteredName(event.target.value);
-	};
-	const ageChangeHandler = (event) => {
-		setEnteredAge(event.target.value);
+		nameInputRef.current.value = "";
+		ageInputRef.current.value = "";
 	};
 
 	return (
@@ -41,12 +39,11 @@ const Form = (props) => {
 				<div>
 					<label htmlFor="username">Name</label>
 					<input
-						value={enteredName}
 						placeholder="enter user name"
 						id="username"
 						type="text"
-						onChange={nameChangeHandler}
 						className={Classes.input}
+						ref={nameInputRef}
 					/>
 				</div>
 				<div>
@@ -55,8 +52,9 @@ const Form = (props) => {
 						placeholder="enter user age"
 						id="age"
 						type="number"
-						onChange={ageChangeHandler}
+						// onChange={ageChangeHandler}
 						className={Classes.input}
+						ref={ageInputRef}
 					/>
 				</div>
 				<Button innerText="Add user" type="submit" />
