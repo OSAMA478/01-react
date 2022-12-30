@@ -42,6 +42,7 @@ const Form = (props) => {
 					<label htmlFor="username">Name</label>
 					<input
 						value={enteredName}
+						placeholder="enter user name"
 						id="username"
 						type="text"
 						onChange={nameChangeHandler}
@@ -51,6 +52,7 @@ const Form = (props) => {
 				<div>
 					<label htmlFor="age">Age</label>
 					<input
+						placeholder="enter user age"
 						id="age"
 						type="number"
 						onChange={ageChangeHandler}
