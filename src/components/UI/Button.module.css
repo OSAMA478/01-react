@@ -3,6 +3,10 @@
 	width: 8rem;
 	height: 2rem;
 	border-radius: 0.5rem;
+
+	position: absolute;
+	right: 1rem;
+	bottom: 0rem;
 }
 
 .button:active {

@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import Classes from "./Form.module.css";
 import Card from "../UI/Card.js";
 import Heading from "../UI/Heading.js";
 import Button from "../UI/Button.js";
 
 const Form = (props) => {
-	const [enteredName, setEnteredName] = useState("");
-	const [enteredAge, setEnteredAge] = useState("");
-	const [isValid, setIsValid] = useState();
+	const nameInputRef = useRef();
+	const ageInputRef = useRef();
 
 	const submitHandler = (event) => {
 		event.preventDefault();
+		const enteredName = nameInputRef.current.value;
+		const enteredAge = ageInputRef.current.value;
+
+		console.log();
+		let errType;
+
 		if (enteredAge.trim().length === 0 || enteredName.trim().length === 0) {
-			setIsValid("empty");
-		}
-		if (+enteredAge < 0) {
-			setIsValid("negative");
+			errType = "empty";
+		} else if (+enteredAge < 0) {
+			errType = "negative";
 		}
 
 		const usersData = {
@@ -23,45 +27,37 @@ const Form = (props) => {
 			name: enteredName,
 			age: enteredAge,
 		};
-		props.transferToParent(usersData, isValid);
-		setEnteredName("");
-		// setEnteredAge("");
-		// props.
-	};
-
-	const nameChangeHandler = (event) => {
-		setEnteredName(event.target.value);
-		console.log(event.target.value);
-	};
-	const ageChangeHandler = (event) => {
-		setEnteredAge(event.target.value);
-		console.log(event.target.value);
+		props.transferToParent(usersData, errType);
+		nameInputRef.current.value = "";
+		ageInputRef.current.value = "";
 	};
 
 	return (
 		<Card>
-			<Heading>Enter User Details</Heading>
+			<Heading innerText="Enter User Details" />
 			<form onSubmit={submitHandler} className={Classes.form}>
 				<div>
 					<label htmlFor="username">Name</label>
 					<input
-						value={enteredName}
+						placeholder="enter user name"
 						id="username"
 						type="text"
-						onChange={nameChangeHandler}
 						className={Classes.input}
+						ref={nameInputRef}
 					/>
 				</div>
 				<div>
 					<label htmlFor="age">Age</label>
 					<input
+						placeholder="enter user age"
 						id="age"
 						type="number"
-						onChange={ageChangeHandler}
+						// onChange={ageChangeHandler}
 						className={Classes.input}
+						ref={ageInputRef}
 					/>
 				</div>
-				<Button type="submit">Add user</Button>
+				<Button innerText="Add user" type="submit" />
 			</form>
 		</Card>
 	);

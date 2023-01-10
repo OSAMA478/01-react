@@ -4,4 +4,10 @@
 
 .form {
 	margin-left: 0.5rem;
+	position: relative;
+}
+
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }

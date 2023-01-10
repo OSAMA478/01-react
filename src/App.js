@@ -4,8 +4,8 @@ import Card from "./components/UI/Card";
 import Heading from "./components/UI/Heading";
 import Users from "./components/Users/Users";
 import Classes from "./App.module.css";
-import EmptyValueModal from "./components/InvalidInput/EmptyValueModal";
-import NegValueModal from "./components/InvalidInput/NegValueModal";
+import Modal from "./components/Modal/Modal";
+
 const initialUserData = [
 	{
 		id: Math.random(),
@@ -25,27 +25,47 @@ const initialUserData = [
 ];
 const App = () => {
 	const [usersData, setUserData] = useState(initialUserData);
-	const [isValid, setIsValid] = useState();
+	const [modalTypeToShow, setModalTypeToShow] = useState();
 
-	const takeValueFromChild = (user, isValid) => {
-		setUserData((prevValue) => [user, ...prevValue]);
-		setIsValid(isValid);
-		// console.log(isValidState);
+	const takeValueFromChild = (user, errType) => {
+		if (!errType) setUserData((prevValue) => [user, ...prevValue]);
+		setModalTypeToShow(errType);
 	};
+
 	const errHandler = () => {
-		setIsValid(null);
+		setModalTypeToShow(null);
 	};
-	console.log(isValid);
+
+	const deleteHandler = (event) => {
+		const id = event.target.id;
+		setUserData(
+			usersData.filter((user) => {
+				return user.id !== id;
+			})
+		);
+	};
 
 	return (
 		<div className={Classes.page}>
 			<Form transferToParent={takeValueFromChild} />
 			<Card>
-				<Heading>Users</Heading>
-				<Users item={usersData} />
+				<Heading innerText="Users" />
+				<Users onClick={deleteHandler} item={usersData} />
 			</Card>
-			{isValid && <EmptyValueModal onConfirm={errHandler} />}
-			{isValid && <NegValueModal onConfirm={errHandler} />}
+
+			{modalTypeToShow === "empty" ? (
+				<Modal
+					message="please type something don't enter empty values"
+					onConfirm={errHandler}
+				/>
+			) : modalTypeToShow === "negative" ? (
+				<Modal
+					message="use non negative number for age"
+					onConfirm={errHandler}
+				/>
+			) : (
+				""
+			)}
 		</div>
 	);
 };

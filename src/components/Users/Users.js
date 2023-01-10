@@ -1,13 +1,20 @@
 import React from "react";
 import User from "../Users/User";
 
-// import Classes from "./Users.module.css";
-
 const Users = (props) => {
 	return (
 		<div>
 			{props.item.map((user) => {
-				return <User key={user.id} name={user.name} age={user.age} />;
+				return (
+					<User
+						onClick={props.onClick}
+						innerText={`${user.name} (${user.age} years old)`}
+						key={user.id}
+						id={user.id}
+						name={user.name}
+						age={user.age}
+					/>
+				);
 			})}
 		</div>
 	);
